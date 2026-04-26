@@ -8,7 +8,7 @@ const amount = document.getElementById('amount');
 
 let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 
-// Add transaction
+
 function addTransaction(e) {
     e.preventDefault();
 
@@ -31,7 +31,7 @@ function addTransaction(e) {
     amount.value = '';
 }
 
-// Display transactions
+
 function addTransactionDOM(transaction) {
     const sign = transaction.amount < 0 ? '-' : '+';
 
@@ -47,7 +47,7 @@ function addTransactionDOM(transaction) {
     list.appendChild(li);
 }
 
-// Update balance
+
 function updateValues() {
     const amounts = transactions.map(t => t.amount);
 
@@ -62,19 +62,19 @@ function updateValues() {
     money_minus.innerText = `-₹${expense}`;
 }
 
-// Remove transaction
+
 function removeTransaction(id) {
     transactions = transactions.filter(t => t.id !== id);
     updateLocalStorage();
     init();
 }
 
-// Save to local storage
+
 function updateLocalStorage() {
     localStorage.setItem('transactions', JSON.stringify(transactions));
 }
 
-// Init app
+
 function init() {
     list.innerHTML = '';
     transactions.forEach(addTransactionDOM);
