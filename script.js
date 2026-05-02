@@ -49,17 +49,40 @@ function addTransactionDOM(transaction) {
 
 
 function updateValues() {
-    const amounts = transactions.map(t => t.amount);
 
-    const total = amounts.reduce((acc, item) => acc + item, 0).toFixed(2);
-    const income = amounts.filter(item => item > 0)
-        .reduce((acc, item) => acc + item, 0).toFixed(2);
-    const expense = (amounts.filter(item => item < 0)
-        .reduce((acc, item) => acc + item, 0) * -1).toFixed(2);
+  
+    let amounts = [];
+    for (let i = 0; i < transactions.length; i++) {
+        amounts.push(transactions[i].amount);
+    }
 
-    balance.innerText = `₹${total}`;
-    money_plus.innerText = `+₹${income}`;
-    money_minus.innerText = `-₹${expense}`;
+
+    let total = 0;
+    for (let i = 0; i < amounts.length; i++) {
+        total = total + amounts[i];
+    }
+
+
+    let income = 0;
+    for (let i = 0; i < amounts.length; i++) {
+        if (amounts[i] > 0) {
+            income = income + amounts[i];
+        }
+    }
+
+ 
+    let expense = 0;
+    for (let i = 0; i < amounts.length; i++) {
+        if (amounts[i] < 0) {
+            expense = expense + amounts[i];
+        }
+    }
+    expense = expense * -1;
+
+   
+    balance.innerText = "₹" + total.toFixed(2);
+    money_plus.innerText = "+₹" + income.toFixed(2);
+    money_minus.innerText = "-₹" + expense.toFixed(2);
 }
 
 
